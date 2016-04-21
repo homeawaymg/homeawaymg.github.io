@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by Mana-Guru (http://jsbin.com/yarabe/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.6/rx.all.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body>
+  <div id="app"></div>
+<script id="jsbin-javascript">
+// Logic (functional)
+function main() {
+  var start = 1000
+  return Rx.Observable.timer(0, 1000)
+    .map(i => `Seconds elapsed ${start + i * 770}`);  
+}
+
+// Effects (imperative)
+function DOMEffect(text$) {
+  text$.subscribe(text => {
+    const container = document.querySelector('#app');
+    container.textContent = text;
+  });
+}
+
+function consoleLogEffect(msg$) {
+  msg$.subscribe(msg => console.log(msg));
+}
+
+const sink = main();
+DOMEffect(sink);
+//consoleLogEffect(sink);
+  
+</script>
+</body>
+</html>
