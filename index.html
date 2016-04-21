@@ -3,7 +3,7 @@
 Created using JS Bin
 http://jsbin.com
 
-Copyright (c) 2016 by Mana-Guru (http://jsbin.com/veyasu/2/edit)
+Copyright (c) 2016 by Mana-Guru (http://jsbin.com/veyasu/3/edit)
 
 Released under the MIT license: http://jsbin.mit-license.org
 -->
@@ -21,6 +21,13 @@ Released under the MIT license: http://jsbin.mit-license.org
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <style>
+.title {
+  font-size: 900%;
+}
+</style>
+
+  
   <meta charset="utf-8">
   <title>JS Bin</title>
 </head>
@@ -28,6 +35,8 @@ Released under the MIT license: http://jsbin.mit-license.org
   <div id="app"></div>
 <script id="jsbin-javascript">
 const {button, p, label, div, makeDOMDriver} = CycleDOM;
+
+
 
 function main(sources) {
   const decrementClick$ = sources.DOM
@@ -43,7 +52,7 @@ function main(sources) {
     .merge(decrementAction$)
     .merge(incrementAction$)
     .merge(timerAction$)
-    .scan((prev, curr) => prev + curr);
+    .scan((prev, curr) => Math.round((prev + curr) * 100) / 100 );
 
   return {
     DOM: number$.map(number =>
