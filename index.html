@@ -28,10 +28,12 @@ Released under the MIT license: http://jsbin.mit-license.org
 <body>
   <div id="app"></div>
 <script id="jsbin-javascript">
+
+var startCountingFrom = 10360000;
+var secondsBetweenRefresh = 3;
+var autoPaymentsPerSecond = 3.48;      
+
 const {button, p, label, div, makeDOMDriver} = CycleDOM;
-
-
-
 function main(sources) {
   const decrementClick$ = sources.DOM
     .select('.decrement').events('click');
@@ -39,10 +41,10 @@ function main(sources) {
     .select('.increment').events('click');
   const decrementAction$ = decrementClick$.map(ev => -1);
   const incrementAction$ = incrementClick$.map(ev => +1);
-  const timerAction$ = Rx.Observable.timer(0, 3*1000)
-    .map(i => 10.45);
+  const timerAction$ = Rx.Observable.timer(0, secondsBetweenRefresh * 1000)
+    .map(i => secondsBetweenRefresh * autoPaymentsPerSecond);
   
-  const number$ = Rx.Observable.of(10360000)
+  const number$ = Rx.Observable.of(startCountingFrom)
     .merge(decrementAction$)
     .merge(incrementAction$)
     .merge(timerAction$)
